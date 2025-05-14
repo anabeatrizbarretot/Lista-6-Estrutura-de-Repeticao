@@ -1,0 +1,56 @@
+/******************************************************************************
+Elabore um algoritmo para solicitar ao usuário o código alfanumérico e o preço de 15 produtos, exibir o
+código e o preço do produto com maior preço, calcular e exibir a média aritmética dos preços dos
+produtos.
+Caso de teste:
+Código Preço Saída de dados
+A001 R$ 35,00 Produto com maior preço: Código B118 - Preço R$ 455,00
+A002 R$ 20,50 Média dos preços dos produtos: R$ 89,36
+A003 R$ 10,00
+A004 R$ 11,20
+A005 R$ 44,00
+B115 R$ 115,00
+B116 R$ 224,30
+B117 R$ 100,00
+B118 R$ 455,00
+B119 R$ 303,00
+C120 R$ 6,00
+C121 R$ 2,50
+C122 R$ 1,20
+C123 R$ 9,20
+C124 R$ 3,50
+
+*******************************************************************************/
+#include <stdio.h>
+
+int main() {
+    char codigo[10];  // Para armazenar o código do produto
+    char codigo_maior_preco[10];  // Para armazenar o código do produto com maior preço
+    float preco, maior_preco = 0, soma_precos = 0, media_precos;
+    
+    // Solicitar os dados dos 15 produtos
+    for (int i = 0; i < 15; i++) {
+        printf("Digite o código do produto %d: ", i + 1);
+        scanf("%s", codigo);  // Lê o código alfanumérico do produto
+        printf("Digite o preço do produto %d: R$ ", i + 1);
+        scanf("%f", &preco);  // Lê o preço do produto
+        
+        // Verifica se o preço do produto atual é maior que o maior preço registrado
+        if (preco > maior_preco) {
+            maior_preco = preco;
+            snprintf(codigo_maior_preco, sizeof(codigo_maior_preco), "%s", codigo);  // Atualiza o código do produto com maior preço
+        }
+        
+        // Soma o preço para cálculo da média
+        soma_precos += preco;
+    }
+    
+    // Calculando a média dos preços
+    media_precos = soma_precos / 15;
+    
+    // Exibindo os resultados
+    printf("Produto com maior preço: Código %s - Preço R$ %.2f\n", codigo_maior_preco, maior_preco);
+    printf("Média dos preços dos produtos: R$ %.2f\n", media_precos);
+    
+    return 0;
+}
