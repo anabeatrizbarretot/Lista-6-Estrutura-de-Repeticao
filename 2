@@ -1,0 +1,53 @@
+/******************************************************************************
+Elabore um algoritmo para ler o nome e o sexo de 10 pessoas, mostrar o nome da pessoa precedido de
+Sr. ou Sra. (de acordo com o sexo) e apresentar no final a quantidade de pessoas do sexo masculino e a
+quantidade de pessoas do sexo feminino.
+Caso de teste:
+Entrada de dados Saída de dados
+João M           Sr. João
+José M           Sr. José
+Maria F          Sra. Maria
+Joana F          Sra. Joana
+Carlos M         Sr. Carlos
+Lúcia F          Sra. Lúcia
+Luiz M           Sr. Luiz
+Gilberto M       Sr. Gilberto
+Caroline F       Sra. Caroline
+Ricardo M        Sr. Ricardo
+Quantidade de pessoas do sexo masculino: 6
+Quantidade de pessoas do sexo feminino: 4 
+
+*******************************************************************************/
+#include <stdio.h>
+
+int main() {
+    char nome[50];  // Para armazenar o nome da pessoa
+    char sexo;      // Para armazenar o sexo da pessoa
+    int masculino = 0, feminino = 0;
+
+    // Solicitar os dados de 10 pessoas
+    for (int i = 0; i < 10; i++) {
+        printf("Digite o nome da pessoa %d: ", i + 1);
+        scanf("%s", nome);  // Lê o nome da pessoa
+        
+        printf("Digite o sexo (M para masculino, F para feminino) da pessoa %d: ", i + 1);
+        scanf(" %c", &sexo);  // Lê o sexo (note o espaço antes de %c para limpar o buffer)
+
+        // Exibe o nome precedido de "Sr." ou "Sra."
+        if (sexo == 'M' || sexo == 'm') {
+            printf("Sr. %s\n", nome);
+            masculino++;  // Conta as pessoas do sexo masculino
+        } else if (sexo == 'F' || sexo == 'f') {
+            printf("Sra. %s\n", nome);
+            feminino++;  // Conta as pessoas do sexo feminino
+        } else {
+            printf("Sexo inválido! Por favor, insira M ou F.\n");
+        }
+    }
+
+    // Exibindo a quantidade de pessoas de cada sexo
+    printf("Quantidade de pessoas do sexo masculino: %d\n", masculino);
+    printf("Quantidade de pessoas do sexo feminino: %d\n", feminino);
+
+    return 0;
+}
