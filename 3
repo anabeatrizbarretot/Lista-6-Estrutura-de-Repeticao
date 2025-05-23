@@ -1,0 +1,64 @@
+/******************************************************************************
+
+Faça um algoritmo para solicitar ao usuário o código alfanumérico e o preço de vários produtos, exibir o
+código e o preço do produto com menor preço, calcular e exibir a média aritmética dos preços dos
+produtos. O final da entrada de dados deve ser sinalizado por meio do código “0000” (sentinela).
+Caso de teste:
+Código Preço Saída de dados
+A001 R$ 35,00 Produto com maior preço: Código A003 - Preço R$ 10,00
+A002 R$ 20,50 Média dos preços dos produtos: R$ 24,14
+A003 R$ 10,00
+A004 R$ 11,20
+A005 R$ 44,00
+
+*******************************************************************************/
+#include <stdio.h>
+
+int main() {
+    char codigo[10];                  // código atual
+    char codigo_menor_preco[10];      // código do menor preço
+    float preco, menor_preco = -1, soma_precos = 0;
+    int contador = 0;
+
+    for (int i = 0; i < 100; i++) {   // até 100 produtos
+        int eh_sentinela = 1;
+
+        printf("Digite o código do produto: ");
+        scanf("%s", codigo);
+
+        // Verifica se é "0000"
+        for (int j = 0; j < 4; j++) {
+            if (codigo[j] != '0') {
+                eh_sentinela = 0;
+                break;
+            }
+        }
+        if (eh_sentinela) {
+            break;  // encerra o loop
+        }
+
+        printf("Digite o preço do produto: R$ ");
+        scanf("%f", &preco);
+
+        // Atualiza menor preço
+        if (menor_preco == -1 || preco < menor_preco) {
+            menor_preco = preco;
+            for (int k = 0; k < 10; k++) {
+                codigo_menor_preco[k] = codigo[k];  // cópia manual do código
+            }
+        }
+
+        soma_precos += preco;
+        contador++;
+    }
+
+    if (contador > 0) {
+        float media_precos = soma_precos / contador;
+        printf("Produto com menor preço: Código %s - Preço R$ %.2f\n", codigo_menor_preco, menor_preco);
+        printf("Média dos preços dos produtos: R$ %.2f\n", media_precos);
+    } else {
+        printf("Nenhum produto foi inserido.\n");
+    }
+
+    return 0;
+}
