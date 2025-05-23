@@ -1,0 +1,90 @@
+/******************************************************************************
+Uma pesquisa sobre algumas características físicas da população de uma determinada região coletou os
+seguintes dados, referentes a cada habitante, para serem analisados:
+ Sexo (masculino, feminino)
+ Cor dos olhos (azuis, verdes, castanhos)
+ Cor dos cabelos (louros, castanhos, pretos)
+ Idade em anos
+Para cada habitante, foi digitada uma linha com esses dados e a última linha, que não corresponde a
+ninguém, conterá o valor de idade igual a -1.
+Faça um algoritmo que solicite ao usuário os dados da linha referente a cada habitante e apresente como
+resultado:
+a) A maior idade dos habitantes;
+b) A porcentagem de habitantes do sexo feminino cuja idade está entre 18 (inclusive) e 35 (inclusive) anos
+e que tenham olhos verdes e cabelos louros.
+Observação: A quantidade de habitantes não é conhecida com antecedência e a entrada de dados é
+controlada pelo valor de idade igual a -1 (sentinela).
+Caso de teste:
+Sexo Cor dos olhos Cor dos cabelos Idade
+masculino castanhos pretos 28
+masculino azuis louros 25
+feminino verdes louros 18
+feminino castanhos castanhos 30
+feminino castanhos castanhos 20
+masculino azuis castanhos 22
+feminino castanhos pretos 18
+masculino castanhos louros 40
+masculino castanhos pretos 36
+feminino verdes louros 20
+feminino castanhos castanhos 35
+masculino castanhos pretos 40
+feminino verdes castanhos 45
+masculino azuis louros 22
+masculino verdes castanhos 20
+masculino castanhos pretos 18
+ -1
+
+Saída de dados
+Maior idade: 45 anos
+Porcentagem (feminino, 18-25 anos, olhos verdes, cabelos louros): 12,5% 
+
+*******************************************************************************/
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char sexo[10], cor_olhos[10], cor_cabelos[10];
+    int idade;
+    int maior_idade = 0;
+    int total_habitantes = 0;
+    int total_feminino_verde_louro = 0;
+
+    while (1) {
+        printf("Sexo (masculino/feminino): ");
+        scanf("%s", sexo);
+        printf("Cor dos olhos (azuis/verdes/castanhos): ");
+        scanf("%s", cor_olhos);
+        printf("Cor dos cabelos (louros/castanhos/pretos): ");
+        scanf("%s", cor_cabelos);
+        printf("Idade: ");
+        scanf("%d", &idade);
+
+        if (idade == -1) {
+            break;
+        }
+
+        total_habitantes++;
+
+        if (idade > maior_idade) {
+            maior_idade = idade;
+        }
+
+        // Verifica se é feminino, idade entre 18 e 35, olhos verdes e cabelos louros
+        if (strcmp(sexo, "feminino") == 0 &&
+            idade >= 18 && idade <= 35 &&
+            strcmp(cor_olhos, "verdes") == 0 &&
+            strcmp(cor_cabelos, "louros") == 0) {
+            total_feminino_verde_louro++;
+        }
+    }
+
+    if (total_habitantes > 0) {
+        double porcentagem = ((double)total_feminino_verde_louro / total_habitantes) * 100.0;
+        printf("Maior idade: %d anos\n", maior_idade);
+        printf("Porcentagem (feminino, 18-35 anos, olhos verdes, cabelos louros): %.1f%%\n", porcentagem);
+    } else {
+        printf("Nenhum dado foi inserido.\n");
+    }
+
+    return 0;
+}
