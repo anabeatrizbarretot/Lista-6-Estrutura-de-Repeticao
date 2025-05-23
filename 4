@@ -1,0 +1,53 @@
+/******************************************************************************
+Uma loja está levantando o valor total de todas as mercadorias em estoque. Elabore um algoritmo para
+permitir ao usuário informar a quantidade e o valor de custo de cada mercadoria, calcular e exibir o valor
+total em estoque e a média do valor de custo. O algoritmo deve perguntar “Mais mercadorias (S/N)?” após
+o usuário informar a quantidade e valor de custo de cada mercadoria e somente continuar a entrada de
+dados se a resposta for “S” ou “s”.
+Caso de teste:
+Quantidade Valor de custo Saída de dados
+55 R$ 10,00 Valor total em estoque: R$ 3716,50
+25 R$ 12,50 Média do valor de custo dos produtos: R$ 49,75
+10 R$ 44,00
+32 R$ 22,00
+11 R$ 110,00
+5 R$ 100,00
+*******************************************************************************/
+#include <stdio.h>
+
+int main() {
+    int quantidade;
+    float valor_custo;
+    float total_estoque = 0;
+    float soma_valor_custo = 0;
+    int contador = 0;
+    char resposta;
+
+    do {
+        printf("Informe a quantidade da mercadoria: ");
+        scanf("%d", &quantidade);
+
+        printf("Informe o valor de custo da mercadoria: R$ ");
+        scanf("%f", &valor_custo);
+
+        // Atualiza o valor total em estoque
+        total_estoque += quantidade * valor_custo;
+
+        // Soma o valor de custo para calcular a média
+        soma_valor_custo += valor_custo;
+
+        contador++;  // Contabiliza o número de mercadorias
+
+        // Pergunta se quer continuar
+        printf("Mais mercadorias (S/N)? ");
+        scanf(" %c", &resposta);  // espaço antes de %c para ignorar '\n'
+
+    } while (resposta == 'S' || resposta == 's');
+
+    float media_valor_custo = soma_valor_custo / contador;
+
+    printf("\nValor total em estoque: R$ %.2f\n", total_estoque);
+    printf("Média do valor de custo dos produtos: R$ %.2f\n", media_valor_custo);
+
+    return 0;
+}
