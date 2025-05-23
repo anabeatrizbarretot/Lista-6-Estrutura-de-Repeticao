@@ -1,0 +1,69 @@
+/******************************************************************************
+A prefeitura de uma cidade deseja fazer uma pesquisa sobre a sua população economicamente ativa. Faça
+um algoritmo para coletar dados sobre salário e número de filhos de cada habitante e apresentar ao final
+da entrada dos dados:
+a) Média do salário dos habitantes;
+b) Média do número de filhos dos habitantes;
+c) Maior salário dos habitantes;
+d) Quantidade de habitantes com salário menor que R$ 3300,00.
+Caso de teste:
+Salário Filhos Saída de dados
+R$ 5.000,00 2 Média do salário dos habitantes: R$ 3200,00
+R$ 1.100,00 5 Média do número de filhos: 2,5
+R$ 1.100,00 3 Maior salário dos habitantes: R$ 6500,00
+R$ 2.000,00 1 Quantidade com salário menor que R$ 3300,00: 3
+R$ 3.500,00 1
+R$ 6.500,00 3
+Observação: Como a quantidade de habitantes não é conhecida com antecedência, deve ser utilizada a
+técnica da repetição controlada por sentinela ou a técnica de perguntar para repetir o processamento. 
+*******************************************************************************/
+#include <stdio.h>
+
+int main() {
+    float salario, soma_salario = 0, maior_salario = 0;
+    int num_filhos, soma_filhos = 0;
+    int total_habitantes = 0;
+    int salario_menor_3300 = 0;
+    char resposta;
+
+    do {
+        // Entrada de dados
+        printf("Informe o salário do habitante: R$ ");
+        scanf("%f", &salario);
+
+        printf("Informe o número de filhos: ");
+        scanf("%d", &num_filhos);
+
+        // Acumuladores
+        soma_salario += salario;
+        soma_filhos += num_filhos;
+        total_habitantes++;
+
+        // Maior salário
+        if (salario > maior_salario) {
+            maior_salario = salario;
+        }
+
+        // Contar salários menores que R$ 3300,00
+        if (salario < 3300.00) {
+            salario_menor_3300++;
+        }
+
+        // Perguntar se quer continuar
+        printf("Deseja informar dados de outro habitante? (S/N): ");
+        scanf(" %c", &resposta); // espaço antes de %c para ignorar '\n'
+
+    } while (resposta == 'S' || resposta == 's');
+
+    // Cálculo das médias
+    float media_salario = soma_salario / total_habitantes;
+    float media_filhos = (float)soma_filhos / total_habitantes;
+
+    // Resultados
+    printf("\nMédia do salário dos habitantes: R$ %.2f\n", media_salario);
+    printf("Média do número de filhos: %.2f\n", media_filhos);
+    printf("Maior salário dos habitantes: R$ %.2f\n", maior_salario);
+    printf("Quantidade com salário menor que R$ 3300,00: %d\n", salario_menor_3300);
+
+    return 0;
+}
