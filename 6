@@ -1,0 +1,41 @@
+/******************************************************************************
+Faça um algoritmo para calcular o resultado de uma divisão representada por uma fração. Solicitar o
+numerador e o denominador para o usuário e, se o denominador for igual a zero, mostrar a mensagem
+“Erro: divisão por zero” e solicitar novamente o denominador. A divisão somente será realizada quando o
+usuário entrar com um denominador diferente de zero.
+Casos de teste:
+a) Para numerador igual a 16 e denominador igual a 2, o resultado é 8;
+b) Para numerador igual a 5 e denominador igual a 0, será apresentada a mensagem “Erro: divisão por
+zero” e será solicitado novamente o denominador;
+c) Para numerador igual a 5 e denominador igual a 2, o resultado é 2.5.
+Observação: Utilize a técnica de entrada de dados com crítica para obter um denominador diferente de
+zero. 
+
+*******************************************************************************/
+#include <stdio.h>
+
+int main() {
+    float numerador, denominador, resultado;
+
+    // Solicita o numerador
+    printf("Digite o numerador: ");
+    scanf("%f", &numerador);
+
+    // Entrada com crítica: o denominador não pode ser zero
+    do {
+        printf("Digite o denominador: ");
+        scanf("%f", &denominador);
+
+        if (denominador == 0) {
+            printf("Erro: divisão por zero\n");
+        }
+    } while (denominador == 0);
+
+    // Realiza a divisão
+    resultado = numerador / denominador;
+
+    // Mostra o resultado
+    printf("Resultado da divisão: %.2f\n", resultado);
+
+    return 0;
+}
