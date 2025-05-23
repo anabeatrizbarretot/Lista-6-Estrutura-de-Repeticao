@@ -1,0 +1,62 @@
+/******************************************************************************
+ Em um frigorífico existem 15 bois. Cada boi tem um cartão contendo seu número de identificação e seu
+peso. Faça um algoritmo para mostrar o número de identificação e o peso do boi mais gordo e do boi mais
+magro.
+Caso de teste:
+Identificação Peso Saída de dados
+367 555,9 Número de identificação do boi mais gordo: 002
+335 477,0 Peso do boi mais gordo: 595,5
+344 498,5 Número de identificação do boi mais magro: 335
+399 501,2 Peso do boi mais magro: 477,0
+311 499,0
+055 585,5
+057 580,0
+059 581,9
+051 582,7
+053 583,3
+001 589,9
+002 595,5
+003 588,1
+004 591,8
+005 593,5
+Observação: Se houver dois ou mais bois com o mesmo peso, que é o peso maior que todos os demais
+pesos, o algoritmo apresenta o número de qual deles? 
+
+*******************************************************************************/
+#include <stdio.h>
+
+int main() {
+    int identificacao, id_gordo, id_magro;
+    float peso, maior_peso = 0, menor_peso = 0;
+    
+    for (int i = 1; i <= 15; i++) {
+        printf("Digite o número de identificação do boi %d: ", i);
+        scanf("%d", &identificacao);
+        
+        printf("Digite o peso do boi %d: ", i);
+        scanf("%f", &peso);
+        
+        if (i == 1) {  // Para inicializar com o primeiro boi
+            maior_peso = peso;
+            menor_peso = peso;
+            id_gordo = identificacao;
+            id_magro = identificacao;
+        } else {
+            if (peso > maior_peso) {
+                maior_peso = peso;
+                id_gordo = identificacao;
+            }
+            if (peso < menor_peso) {
+                menor_peso = peso;
+                id_magro = identificacao;
+            }
+        }
+    }
+    
+    printf("\nNúmero de identificação do boi mais gordo: %03d\n", id_gordo);
+    printf("Peso do boi mais gordo: %.1f\n", maior_peso);
+    printf("Número de identificação do boi mais magro: %03d\n", id_magro);
+    printf("Peso do boi mais magro: %.1f\n", menor_peso);
+
+    return 0;
+}
