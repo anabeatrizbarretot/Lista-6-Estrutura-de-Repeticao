@@ -1,0 +1,57 @@
+/******************************************************************************
+Uma pessoa aplicou o seu capital a juros e deseja saber, trimestralmente, a posição de seu investimento
+inicial C. Considerando i como a taxa de juros do trimestre, elaborar um algoritmo para produzir uma
+tabela que apresente para cada trimestre o rendimento auferido e o saldo acumulado durante um período
+de x anos, supondo que nenhuma retirada tenha sido feita. A fórmula para a capitalização composta é a
+seguinte:
+𝑀௡ = 𝐶 (1 + 𝑖)
+௡
+, onde:
+ Mn saldo após decorridos n trimestres;
+ C capital inicial investido;
+ i taxa de juros;
+ n número de períodos decorridos (trimestres).
+Caso de teste:
+Para um investimento inicial de R$ 5.000,00, taxa de juros de 0,012 (1,2%) por trimestre e período de 2
+anos, a seguinte tabela seria apresentada:
+Trimestre Rendimento Saldo acumulado
+1 R$ 60,00 R$ 5060,00
+2 R$ 60,72 R$ 5120,72
+3 R$ 61,45 R$ 5182,17
+4 R$ 62,19 R$ 5244,35
+5 R$ 62,93 R$ 5307,29
+6 R$ 63,69 R$ 5370,97
+7 R$ 64,45 R$ 5435,43
+8 R$ 65,23 R$ 5500,65
+
+*******************************************************************************/
+#include <stdio.h>
+
+int main() {
+    double C, i, saldo, rendimento;
+    int x, trimestres;
+
+    printf("Capital inicial (R$): ");
+    scanf("%lf", &C);
+
+    printf("Taxa de juros trimestral (ex: 0.012 para 1,2%%): ");
+    scanf("%lf", &i);
+
+    printf("Periodo (anos): ");
+    scanf("%d", &x);
+
+    trimestres = x * 4;
+    saldo = C;
+
+    printf("\nTrimestre\tRendimento\tSaldo acumulado\n");
+
+    for (int t = 1; t <= trimestres; t++) {
+        double saldo_anterior = saldo;
+        saldo = saldo * (1 + i);
+        rendimento = saldo - saldo_anterior;
+
+        printf("%d\t\tR$ %.2lf\tR$ %.2lf\n", t, rendimento, saldo);
+    }
+
+    return 0;
+}
